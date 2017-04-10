@@ -16,10 +16,13 @@ namespace fjfj {
         glBindVertexArray(VAO);
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-        glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr) (sizeof(GLfloat) * 3 * vert_count), vertices, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr) (sizeof(GLfloat) * 5 * vert_count), vertices, GL_STATIC_DRAW);
 
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *) 0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid *) 0);
         glEnableVertexAttribArray(0);
+
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid *) (3 * sizeof(GL_FLOAT)));
+        glEnableVertexAttribArray(1);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -35,6 +38,61 @@ namespace fjfj {
         glBindVertexArray(this->VAO);
         glDrawArrays(GL_TRIANGLES, 0, this->vert_count);
         glBindVertexArray(0);
+    }
+
+    Model* Model::genCube() {
+        GLfloat cube_vert[] = {
+                -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,//FRONT
+                0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
+                0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+
+                -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+                -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
+                0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+
+                -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,//BACK
+                0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
+                0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
+
+                -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+                -0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
+                0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
+
+                -0.5f, 0.5f, -0.5f, 0.0f, 0.0f,//TOP
+                0.5f, 0.5f, -0.5f, 1.0f, 0.0f,
+                0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
+
+                -0.5f, 0.5f, -0.5f, 0.0f, 0.0f,
+                -0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
+                0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
+
+                -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,//BOTTOM
+                0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
+                0.5f, -0.5f, 0.5f, 1.0f, 1.0f,
+
+                -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+                -0.5f, -0.5f, 0.5f, 0.0f, 1.0f,
+                0.5f, -0.5f, 0.5f, 1.0f, 1.0f,
+
+                -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,//LEFT
+                -0.5f, 0.5f, -0.5f, 1.0f, 0.0f,
+                -0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
+
+                -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+                -0.5f, -0.5f, 0.5f, 0.0f, 1.0f,
+                -0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
+
+                0.5f, -0.5f, -0.5f, 0.0f, 0.0f,//RIGHT
+                0.5f, 0.5f, -0.5f, 1.0f, 0.0f,
+                0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
+
+                0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+                0.5f, -0.5f, 0.5f, 0.0f, 1.0f,
+                0.5f, 0.5f, 0.5f, 1.0f, 1.0f
+        };
+
+        return new Model(cube_vert, 36);
+
     }
 
 }

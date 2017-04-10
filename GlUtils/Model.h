@@ -20,6 +20,8 @@ namespace fjfj {
         ~Model();
 
         void draw();
+
+        static Model* genCube();
     };
 
 }

@@ -24,6 +24,8 @@ namespace fjfj {
 
     void Camera::lookAt(glm::vec3 target) {
         this->Front = glm::normalize(target - this->Position);
+        this->Right = glm::normalize(glm::cross(this->Front, this->WorldUp));
+        this->Up = glm::normalize(glm::cross(this->Right, this->Front));
     }
 
     void Camera::update() {

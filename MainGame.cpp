@@ -10,64 +10,62 @@
 #include "GlUtils/Camera.h"
 #include "GlUtils/Shader.h"
 #include "GlUtils/Model.h"
+#include "GlUtils/Texture.h"
 
-using fjfj::Shader;
-using fjfj::Camera;
-using fjfj::Model;
+namespace fjfj {
 
-Camera *cam;
-Shader* shader;
-Model* cube;
+    Camera *cam;
+    Shader *shader;
+    Model *cube;
+    Texture *texture;
 
-GLint proj_location;
+    GLint proj_location;
+    GLint tex_location;
 
-GLfloat cube_vert[] = {
-        -0.5f, -0.5f, 0.0,
-        0.5f, -0.5f, 0.0,
-        0.5f,  0.5f, 0.0,
+    glm::mat4 rot;
 
-        -0.5f, -0.5f, 0.0,
-        -0.5f, 0.5f, 0.0,
-        0.5f,  0.5f, 0.0
-};
+    void fjfj::MainGame::init() {
 
-bool first = true;
-glm::mat4 rot;
+        glEnable(GL_MULTISAMPLE);
+        glEnable(GL_DEPTH_TEST);
 
-void fjfj::MainGame::init() {
-    cam = new Camera(800, 600, glm::vec3(0.0f, 0.0f, 2.0f));
-    cam->lookAt(glm::vec3(0,0,0));
-    shader = new Shader("shader/simple.vert", "shader/simple.frag");
-    cube = new Model(cube_vert, 6);
-    proj_location = glGetUniformLocation(shader->Program, "u_Projection");
-    rot = glm::rotate(glm::mat4(), 0.001f, glm::vec3(1, 0 ,0));
-}
+        cam = new Camera(800, 600, glm::vec3(2.0f, 1.0f, -3.0f));
+        cam->lookAt(glm::vec3(0, 0, 0));
+        shader = new Shader("shader/simple.vert", "shader/simple.frag");
+        cube = Model::genCube();
 
-void fjfj::MainGame::update() {
+        proj_location = glGetUniformLocation(shader->Program, "u_Projection");
+        tex_location = glGetUniformLocation(shader->Program, "texture0");
 
-    glm::vec4 buf = glm::vec4(cam->Front, 1.0f);
-    buf = rot * buf;
-    cam->Front.x = buf.x;
-    cam->Front.y = buf.y;
-    cam->Front.z = buf.z;
-}
+        rot = glm::rotate(glm::mat4(), 0.000001f, glm::vec3(1, 1, 0));
+        texture = new Texture("texture/test.png");
 
-void fjfj::MainGame::render() {
-
-    if(first){
-        first = false;
-        init();
     }
 
-    glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    void fjfj::MainGame::update() {
+        rot = rot * glm::rotate(glm::mat4(), 0.0001f, glm::vec3(1, 0, 0));
+    }
 
-    shader->Use();
+    void fjfj::MainGame::render() {
 
-    glUniformMatrix4fv(proj_location, 1, GL_FALSE, glm::value_ptr(cam->GetCombinedMatrix()));
+        glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_DEPTH_BUFFER_BIT);
 
-    cube->draw();
+        shader->Use();
 
-    glUseProgram(0);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture->texture);
+
+        glUniform1i(tex_location, 0);
+
+        glUniformMatrix4fv(proj_location, 1, GL_FALSE, glm::value_ptr(cam->GetCombinedMatrix() * rot));
+
+        cube->draw();
+        glBindTexture(GL_TEXTURE_2D, 0);
+
+        glUseProgram(0);
+
+    }
 
 }

@@ -2,11 +2,10 @@
 #include <SDL2/SDL.h>
 
 #include "MainGame.h"
-
+#include <iostream>
 using fjfj::MainGame;
 
 int main(int argc, char** argv) {
-
     SDL_Window *window;
     SDL_GLContext context;
 
