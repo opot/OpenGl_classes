@@ -32,16 +32,24 @@ GLfloat cube_vert[] = {
 };
 
 bool first = true;
+glm::mat4 rot;
+
 void fjfj::MainGame::init() {
-    cam = new Camera(800, 600, glm::vec3(2.0f, 1.0f, 1.5f));
+    cam = new Camera(800, 600, glm::vec3(0.0f, 0.0f, 2.0f));
     cam->lookAt(glm::vec3(0,0,0));
     shader = new Shader("shader/simple.vert", "shader/simple.frag");
     cube = new Model(cube_vert, 6);
     proj_location = glGetUniformLocation(shader->Program, "u_Projection");
+    rot = glm::rotate(glm::mat4(), 0.001f, glm::vec3(1, 0 ,0));
 }
 
 void fjfj::MainGame::update() {
-    glutPostRedisplay();
+
+    glm::vec4 buf = glm::vec4(cam->Front, 1.0f);
+    buf = rot * buf;
+    cam->Front.x = buf.x;
+    cam->Front.y = buf.y;
+    cam->Front.z = buf.z;
 }
 
 void fjfj::MainGame::render() {
@@ -62,5 +70,4 @@ void fjfj::MainGame::render() {
 
     glUseProgram(0);
 
-    glutSwapBuffers();
 }
