@@ -7,17 +7,21 @@
 
 #include <GL/glew.h>
 
-class Model {
+namespace fjfj {
 
-    GLuint VBO, VAO;
-    int vert_count;
+    class Model {
 
-public:
-    Model(GLfloat vertices[], int vert_count);
-    ~Model();
+        GLuint VBO, VAO;
+        int vert_count;
 
-    void draw();
-};
+    public:
+        Model(GLfloat vertices[], int vert_count);
 
+        ~Model();
+
+        void draw();
+    };
+
+}
 
 #endif //GLUTGL_RENDERABLE_H

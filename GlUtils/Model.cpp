@@ -5,33 +5,36 @@
 #include <iostream>
 #include "Model.h"
 
-Model::Model(GLfloat vertices[], int vert_count) {
-    this->vert_count = vert_count;
+namespace fjfj {
 
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
+    Model::Model(GLfloat vertices[], int vert_count) {
+        this->vert_count = vert_count;
 
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glGenVertexArrays(1, &VAO);
+        glGenBuffers(1, &VBO);
 
-    glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr)(sizeof(GLfloat) * 3 * vert_count), vertices, GL_STATIC_DRAW);
+        glBindVertexArray(VAO);
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-    glEnableVertexAttribArray(0);
+        glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr) (sizeof(GLfloat) * 3 * vert_count), vertices, GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *) 0);
+        glEnableVertexAttribArray(0);
 
-    glBindVertexArray(0);
-}
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-Model::~Model() {
-    glDeleteBuffers(1, &VBO);
-    glDeleteVertexArrays(1, &VAO);
-}
+        glBindVertexArray(0);
+    }
 
-void Model::draw() {
-    glBindVertexArray(this->VAO);
-    glDrawArrays(GL_TRIANGLES, 0, this->vert_count);
-    std::cout << this->vert_count << "\n";
-    glBindVertexArray(0);
+    Model::~Model() {
+        glDeleteBuffers(1, &VBO);
+        glDeleteVertexArrays(1, &VAO);
+    }
+
+    void Model::draw() {
+        glBindVertexArray(this->VAO);
+        glDrawArrays(GL_TRIANGLES, 0, this->vert_count);
+        glBindVertexArray(0);
+    }
+
 }
