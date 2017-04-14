@@ -30,8 +30,8 @@ namespace fjfj {
     }
 
     Model::~Model() {
-        glDeleteBuffers(1, &VBO);
-        glDeleteVertexArrays(1, &VAO);
+        //glDeleteBuffers(1, &VBO);
+        //glDeleteVertexArrays(1, &VAO);
     }
 
     void Model::draw() {

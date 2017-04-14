@@ -7,5 +7,5 @@ in vec2 v_TexCoord;
 out vec4 frag_color;
 
 void main() {
-	frag_color = texture(texture0, v_TexCoord);
+    frag_color = texture(texture0, v_TexCoord);
 }

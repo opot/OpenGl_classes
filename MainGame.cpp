@@ -28,6 +28,8 @@ namespace fjfj {
 
         glEnable(GL_MULTISAMPLE);
         glEnable(GL_DEPTH_TEST);
+        glEnable(GL_BLEND);
+        glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
         cam = new Camera(800, 600, glm::vec3(2.0f, 1.0f, -3.0f));
         cam->lookAt(glm::vec3(0, 0, 0));
@@ -48,9 +50,8 @@ namespace fjfj {
 
     void fjfj::MainGame::render() {
 
-        glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-        glClear(GL_DEPTH_BUFFER_BIT);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         shader->Use();
 
