@@ -3,11 +3,11 @@
 //
 
 #include <iostream>
-#include "Model.h"
+#include "Mesh.h"
 
 namespace fjfj {
 
-    Model::Model(GLfloat vertices[], int vert_count) {
+    Mesh::Mesh(GLfloat vertices[], int vert_count) {
         this->vert_count = vert_count;
 
         glGenVertexArrays(1, &VAO);
@@ -29,18 +29,18 @@ namespace fjfj {
         glBindVertexArray(0);
     }
 
-    Model::~Model() {
+    Mesh::~Mesh() {
         //glDeleteBuffers(1, &VBO);
         //glDeleteVertexArrays(1, &VAO);
     }
 
-    void Model::draw() {
+    void Mesh::draw() {
         glBindVertexArray(this->VAO);
         glDrawArrays(GL_TRIANGLES, 0, this->vert_count);
         glBindVertexArray(0);
     }
 
-    Model* Model::genCube() {
+    Mesh* Mesh::genCube() {
         GLfloat cube_vert[] = {
                 -0.5f, -0.5f, -0.5f, 0.33f, 0.5f,//FRONT
                 0.5f, -0.5f, -0.5f, 0.66f, 0.5f,
@@ -91,7 +91,7 @@ namespace fjfj {
                 0.5f, 0.5f, 0.5f, 1.0f, 0.5f
         };
 
-        return new Model(cube_vert, 36);
+        return new Mesh(cube_vert, 36);
 
     }
 

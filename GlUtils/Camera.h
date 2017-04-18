@@ -26,8 +26,8 @@ namespace fjfj {
         // Perspective options
         float fov = 37;
         float aspect;
-        float near = 0.001f;
-        float far = 1000;
+        float near = 0.01f;
+        float far = 100;
 
         Camera(int width, int height, glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f),
                glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f));

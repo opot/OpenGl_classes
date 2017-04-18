@@ -9,19 +9,19 @@
 
 namespace fjfj {
 
-    class Model {
+    class Mesh {
 
         GLuint VBO, VAO;
         int vert_count;
 
     public:
-        Model(GLfloat vertices[], int vert_count);
+        Mesh(GLfloat vertices[], int vert_count);
 
-        ~Model();
+        ~Mesh();
 
         void draw();
 
-        static Model* genCube();
+        static Mesh* genCube();
     };
 
 }

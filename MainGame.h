@@ -10,7 +10,7 @@ namespace fjfj {
     class MainGame {
     public:
         static void init();
-        static void update();
+        static void update(float delta);
         static void render();
     };
 
