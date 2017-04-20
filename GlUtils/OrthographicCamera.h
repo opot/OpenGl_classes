@@ -5,13 +5,28 @@
 #ifndef GLUTGL_ORTHOGRAPHICCAMERA_H
 #define GLUTGL_ORTHOGRAPHICCAMERA_H
 
+#include <GL/glew.h>
 
-class OrthographicCamera {
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
-    float width, height;
+namespace fjfj {
 
+    class OrthographicCamera {
 
-};
+    public:
+        float width, height;
+        glm::vec2 position;
 
+        glm::mat4 proj;
+
+        OrthographicCamera(float width, float height);
+
+        void update();
+
+    };
+
+}
 
 #endif //GLUTGL_ORTHOGRAPHICCAMERA_H

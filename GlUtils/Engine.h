@@ -22,8 +22,6 @@ namespace fjfj {
 
     //TODO obj loader
     //TODO Mesh concat
-    //TODO OrthographicCamera
-    //TODO 2dRenderer
 }
 
 #endif //GLUTGL_ENGINE_H
