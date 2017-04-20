@@ -28,16 +28,16 @@ namespace fjfj {
         float aspect;
         float near = 0.01f;
         float far = 100;
+        glm::mat4 perspective;
 
         Camera(int width, int height, glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f),
                glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f));
 
         glm::mat4 GetViewMatrix();
 
-        glm::mat4 GetCombinedMatrix();
-
         void lookAt(glm::vec3 target);
         void update();
+        void updatePerspective();
 
     };
 

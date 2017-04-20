@@ -10,9 +10,7 @@ namespace fjfj {
 
     class Engine {
         void (*init)(void);
-
         void (*update)(float);
-
         void (*render)(void);
 
     public:
@@ -22,6 +20,10 @@ namespace fjfj {
 
     };
 
+    //TODO obj loader
+    //TODO Mesh concat
+    //TODO OrthographicCamera
+    //TODO 2dRenderer
 }
 
 #endif //GLUTGL_ENGINE_H
