@@ -20,7 +20,6 @@ namespace fjfj {
 
     };
 
-    //TODO obj loader
     //TODO Mesh concat
 }
 
