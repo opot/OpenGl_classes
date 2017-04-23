@@ -39,7 +39,7 @@ namespace fjfj {
 
     void Mesh::draw() {
         glBindVertexArray(this->VAO);
-        //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         glDrawArrays(GL_TRIANGLES, 0, this->vert_count);
         glBindVertexArray(0);
     }

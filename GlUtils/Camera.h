@@ -27,7 +27,7 @@ namespace fjfj {
         float fov = 37;
         float aspect;
         float near = 0.01f;
-        float far = 100;
+        float far = 1000;
         glm::mat4 perspective;
 
         Camera(int width, int height, glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f),
