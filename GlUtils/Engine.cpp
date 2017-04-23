@@ -8,6 +8,8 @@
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
 
+extern std::queue<SDL_Event> KeyBoardController::events_t;
+
 namespace fjfj {
 
     Uint64 LAST = 0;
