@@ -13,7 +13,7 @@ uniform mat4 u_ViewTrans;
 uniform mat4 u_ProjTrans;
 
 void main() {
-    v_TexCoord.xy = a_TexCoord.xy;
+    v_TexCoord = a_TexCoord;
     v_Normal = (u_ModelTrans * vec4(a_Normal, 1.0)).xyz;
 
     vec4 vert = u_ViewTrans * u_ModelTrans * vec4(a_Position, 1.0);

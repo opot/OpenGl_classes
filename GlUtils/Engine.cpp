@@ -3,6 +3,7 @@
 //
 
 #include "Engine.h"
+#include "../player/KeyBoardController.h"
 
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
@@ -40,7 +41,10 @@ namespace fjfj {
         while(!quit){
 
             while(SDL_PollEvent(&event_t)){
-                if( event_t.type == SDL_QUIT ) { quit = true; }
+                if( event_t.type == SDL_QUIT ) {
+                    quit = true;
+                }else
+                    KeyBoardController::events_t.push(event_t);
             }
 
             this->update((SDL_GetPerformanceCounter() - LAST) / (float)SDL_GetPerformanceFrequency());

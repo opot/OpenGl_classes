@@ -35,7 +35,7 @@ namespace fjfj {
         glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-        cam = new Camera(800, 600, glm::vec3(0.0f, 0.0f, 50.0f));
+        cam = new Camera(800, 600, glm::vec3(0.0f, 0.0f, 5.0f));
         cam->lookAt(glm::vec3(0, 0, 0));
         shader = new Shader("shader/simple.vert", "shader/simple.frag");
         cube = Mesh::genCube();
@@ -49,7 +49,7 @@ namespace fjfj {
         rot = glm::rotate(glm::mat4(), 0.000001f, glm::vec3(1, 1, 0));
         texture = new Texture("texture/test.png");
 
-        cube = MeshLoader::LoadMesh("models/loop.obj");
+        cube = MeshLoader::LoadMesh("models/tor.obj");
     }
 
     void MainGame::update(float delta) {
