@@ -31,4 +31,7 @@ void KeyBoardController::update() {
         events_t.pop();
     }*/
 
+void KeyBoardController::update() {
+    for(int i = 0 ; i < events_t.size(); i++);
+
 }
