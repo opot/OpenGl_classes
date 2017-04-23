@@ -11,6 +11,8 @@
 #include "GlUtils/Mesh.h"
 #include "GlUtils/Texture.h"
 #include "GlUtils/MeshLoader.h"
+#include "player/Player.h"
+#include "player/KeyBoardController.h"
 
 namespace fjfj {
 
@@ -18,7 +20,8 @@ namespace fjfj {
     Shader *shader;
     Mesh *cube;
     Texture *texture;
-
+    Player *player;
+    KeyBoardController *controller;
     GLint proj_location;
     GLint view_location;
     GLint model_location;
@@ -47,13 +50,14 @@ namespace fjfj {
         tex_location = glGetUniformLocation(shader->Program, "texture0");
 
         rot = glm::rotate(glm::mat4(), 0.000001f, glm::vec3(1, 1, 0));
-        texture = new Texture("texture/test.png");
+        texture = new Texture("texture/tor_texture.png");
 
         cube = MeshLoader::LoadMesh("models/tor.obj");
     }
 
     void MainGame::update(float delta) {
         rot = rot * glm::rotate(glm::mat4(), 3.14f * delta / 4, glm::vec3(1, 0, 0));
+
     }
 
     void MainGame::render() {
