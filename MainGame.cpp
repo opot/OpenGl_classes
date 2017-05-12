@@ -5,6 +5,7 @@
 #include <GL/glew.h>
 #include <iostream>
 
+#include "World.h"
 #include "MainGame.h"
 #include "GlUtils/Camera.h"
 #include "GlUtils/Shader.h"
@@ -16,16 +17,12 @@ namespace fjfj {
 
     Camera *cam;
     Shader *shader;
-    Mesh *cube;
-    Texture *texture;
+    World *world;
 
     GLint proj_location;
     GLint view_location;
     GLint model_location;
 
-    GLint tex_location;
-
-    glm::mat4 rot;
 
     void MainGame::init() {
 
@@ -38,22 +35,16 @@ namespace fjfj {
         cam = new Camera(800, 600, glm::vec3(0.0f, 0.0f, 5.0f));
         cam->lookAt(glm::vec3(0, 0, 0));
         shader = new Shader("shader/simple.vert", "shader/simple.frag");
-        cube = Mesh::genCube();
 
         proj_location = glGetUniformLocation(shader->Program, "u_ProjTrans");
         view_location = glGetUniformLocation(shader->Program, "u_ViewTrans");
         model_location = glGetUniformLocation(shader->Program, "u_ModelTrans");
 
-        tex_location = glGetUniformLocation(shader->Program, "texture0");
-
-        rot = glm::rotate(glm::mat4(), 0.000001f, glm::vec3(1, 1, 0));
-        texture = new Texture("texture/test.png");
-
-        cube = MeshLoader::LoadMesh("models/tor.obj");
+        world = new World(0.22f, 0.8f);
     }
 
     void MainGame::update(float delta) {
-        rot = rot * glm::rotate(glm::mat4(), 3.14f * delta / 4, glm::vec3(1, 0, 0));
+        world->update(delta, cam);
     }
 
     void MainGame::render() {
@@ -62,14 +53,11 @@ namespace fjfj {
 
         shader->Use();
 
-        glBindTexture(GL_TEXTURE_2D, texture->texture);
-
         glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(cam->GetViewMatrix()));
         glUniformMatrix4fv(proj_location, 1, GL_FALSE, glm::value_ptr(cam->perspective));
-        glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(rot));
+        glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(glm::mat4()));
 
-        cube->draw();
-        glBindTexture(GL_TEXTURE_2D, 0);
+        world->draw();
 
         glUseProgram(0);
     }
