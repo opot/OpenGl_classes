@@ -22,6 +22,7 @@ class World {
 
     float r, R;
     float u, v;
+
     float yaw;
     float pitch;
 

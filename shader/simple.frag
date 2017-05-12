@@ -8,7 +8,7 @@ in vec3 v_World_Coord;
 
 out vec4 frag_color;
 
-const vec3 light = vec3(0.0, 3.0, 0.0);
+const vec3 light = vec3(0.0, 0.0, 0.0);
 
 void main() {
     vec4 color = texture(texture0, v_TexCoord);

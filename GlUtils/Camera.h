@@ -24,7 +24,7 @@ namespace fjfj {
         glm::vec3 Right;
         glm::vec3 WorldUp;
         // Perspective options
-        float fov = 37;
+        float fov = 43;
         float aspect;
         float near = 0.01f;
         float far = 1000;

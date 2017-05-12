@@ -29,7 +29,7 @@ namespace fjfj {
         SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
         SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
-        window = SDL_CreateWindow("OpenGl", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600,
+        window = SDL_CreateWindow("OpenGl", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1366, 768,
                                   SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
         context = SDL_GL_CreateContext(window);
         SDL_GL_SetSwapInterval(0);

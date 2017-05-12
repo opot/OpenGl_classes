@@ -8,11 +8,13 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include <iostream>
+
 #include <SDL2/SDL.h>
 #include "GlUtils/MeshLoader.h"
 
 World::World(float r, float R): u(0), v(0), r(r), R(R), pitch(0), yaw(0){
-    texture = new Texture("texture/tor.png");
+    texture = new Texture("texture/tor_texture2.png");
     torus = fjfj::MeshLoader::LoadMesh("models/tor_norm.obj");
 }
 
@@ -20,26 +22,41 @@ World::World(float r, float R): u(0), v(0), r(r), R(R), pitch(0), yaw(0){
 void World::update(float delta, Camera* camera){
     const Uint8 *state = SDL_GetKeyboardState(NULL);
 
-    if(state[SDL_SCANCODE_UP])
-        u += delta;
-    if(state[SDL_SCANCODE_DOWN])
-        u -= delta;
-    if(state[SDL_SCANCODE_LEFT])
-        v -= delta;
-    if(state[SDL_SCANCODE_RIGHT])
-        v += delta;
-    if(state[SDL_SCANCODE_A])
-        yaw -= delta;
-    if(state[SDL_SCANCODE_D])
+    float dv = 1;
+    float du = r / (R  + r * glm::cos(v)) * dv ;
+
+    if(state[SDL_SCANCODE_W]) {
+        u += delta * du * glm::cos(yaw);
+        v += delta * dv * glm::sin(yaw);
+    }
+    if(state[SDL_SCANCODE_S]) {
+        u -= delta * du * glm::cos(yaw);
+        v -= delta * dv * glm::sin(yaw);
+    }
+
+    if(state[SDL_SCANCODE_A]) {
+        v -= delta * dv * glm::cos(yaw);
+        u += delta * du * glm::sin(yaw);
+    }
+    if(state[SDL_SCANCODE_D]) {
+        v += delta * dv * glm::cos(yaw);
+        u -= delta * du * glm::sin(yaw);
+    }
+
+    int mx, my;
+    SDL_GetMouseState(&mx, &my);
+    SDL_WarpMouseInWindow(NULL, 300, 300);
+
+    //if(state[SDL_SCANCODE_A])
+    yaw += (mx - 300) / 500.0f;
+    pitch -= (my - 300) / 500.0f;
+    pitch = glm::clamp(pitch, -1.57f, 1.57f);
+    /*if(state[SDL_SCANCODE_D])
         yaw += delta;
     if(state[SDL_SCANCODE_S])
         pitch -= delta;
     if(state[SDL_SCANCODE_W])
-        pitch += delta;
-
-    camera->Up = glm::normalize(glm::vec3( -(R + r * glm::cos(v)) * glm::cos(u) * glm::cos(v) * r,
-                                -(R + r * glm::cos(v)) *  glm::sin(v) * (glm::sin(u) * glm::sin(u) + r * glm::cos(u) * glm::cos(u)),
-                                -(R + r * glm::cos(v)) * glm::sin(u) * glm::cos(v) * r));
+        pitch += delta;*/
 
     glm::vec3 front = glm::normalize(glm::vec3(
             -(R + r * glm::cos(v)) * glm::sin(u),
@@ -52,6 +69,8 @@ void World::update(float delta, Camera* camera){
             r * glm::cos(v),
             -r * glm::sin(u) * glm::sin(v)
     ));
+
+    camera->Up = glm::cross(front, right);
 
     camera->Position = glm::vec3(
             (R + r * glm::cos(v)) * glm::cos(u),

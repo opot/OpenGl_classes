@@ -34,7 +34,7 @@ namespace fjfj {
         glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-        cam = new Camera(800, 600, glm::vec3(0.0f, 0.0f, 5.0f));
+        cam = new Camera(1366, 768, glm::vec3(0.0f, 0.0f, 5.0f));
         cam->lookAt(glm::vec3(0, 0, 0));
         shader = new Shader("shader/simple.vert", "shader/simple.frag");
 
@@ -42,7 +42,7 @@ namespace fjfj {
         view_location = glGetUniformLocation(shader->Program, "u_ViewTrans");
         model_location = glGetUniformLocation(shader->Program, "u_ModelTrans");
 
-        world = new World(0.22f, 0.8f);
+        world = new World(0.25f, 0.8f);
     }
 
     void MainGame::update(float delta) {

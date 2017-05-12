@@ -17,6 +17,6 @@ void main() {
     v_Normal = (u_ModelTrans * vec4(a_Normal, 1.0)).xyz;
 
     vec4 vert = u_ViewTrans * u_ModelTrans * vec4(a_Position, 1.0);
-    v_World_Coord = vert.xyz;
+    v_World_Coord = (u_ModelTrans * vec4(a_Position, 1.0)).xyz;
 	gl_Position = u_ProjTrans * vert;
 }
