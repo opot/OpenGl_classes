@@ -12,6 +12,8 @@
 #include "GlUtils/Mesh.h"
 #include "GlUtils/Texture.h"
 #include "GlUtils/MeshLoader.h"
+#include "player/Player.h"
+#include "player/KeyBoardController.h"
 
 namespace fjfj {
 
