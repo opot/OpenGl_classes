@@ -3,28 +3,14 @@
 //
 
 #include <GL/glew.h>
-#include <iostream>
 
-#include "World.h"
 #include "MainGame.h"
-#include "GlUtils/Camera.h"
-#include "GlUtils/Shader.h"
-#include "GlUtils/Mesh.h"
-#include "GlUtils/Texture.h"
-#include "GlUtils/MeshLoader.h"
-#include "player/Player.h"
-#include "player/KeyBoardController.h"
+#include "Sphere.h"
 
 namespace fjfj {
 
     Camera *cam;
-    Shader *shader;
-    World *world;
-
-    GLint proj_location;
-    GLint view_location;
-    GLint model_location;
-
+    Sphere *sph;
 
     void MainGame::init() {
 
@@ -34,34 +20,19 @@ namespace fjfj {
         glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-        cam = new Camera(1366, 768, glm::vec3(0.0f, 0.0f, 5.0f));
-        cam->lookAt(glm::vec3(0, 0, 0));
-        shader = new Shader("shader/simple.vert", "shader/simple.frag");
+        cam = new Camera(1366, 768, glm::vec3(1.0f, 0.0f, 1.0f));
+        cam->lookAt(glm::vec3(0, 0, 1));
 
-        proj_location = glGetUniformLocation(shader->Program, "u_ProjTrans");
-        view_location = glGetUniformLocation(shader->Program, "u_ViewTrans");
-        model_location = glGetUniformLocation(shader->Program, "u_ModelTrans");
-
-        world = new World(0.25f, 0.8f);
+        sph = new Sphere(20, 20, 0.5);
     }
 
     void MainGame::update(float delta) {
-        world->update(delta, cam);
+        sph->update(*cam, delta);
     }
 
     void MainGame::render() {
-
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        shader->Use();
-
-        glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(cam->GetViewMatrix()));
-        glUniformMatrix4fv(proj_location, 1, GL_FALSE, glm::value_ptr(cam->perspective));
-        glUniformMatrix4fv(model_location, 1, GL_FALSE, glm::value_ptr(glm::mat4()));
-
-        world->draw();
-
-        glUseProgram(0);
+        sph->draw(*cam);
     }
 
 }

@@ -15,4 +15,16 @@ namespace fjfj{
                                 position.y - height / 2, position.y + height / 2);
     }
 
+    float OrthographicCamera::getHeight() {
+        return height;
+    }
+
+    float OrthographicCamera::getWidth() {
+        return width;
+    }
+
+    glm::vec2 OrthographicCamera::getPosition() {
+        return position;
+    }
+
 }

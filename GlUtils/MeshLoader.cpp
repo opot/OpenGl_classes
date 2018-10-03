@@ -102,7 +102,7 @@ namespace fjfj{
             vertexData[i * 8 + 7] = 1 - texCoords[faces[i].y - 1].y;
         }
 
-        Mesh* res = new Mesh(vertexData, faces.size());
+        Mesh* res = new Mesh(vertexData, (int)faces.size());
         delete vertexData;
         fin.close();
         return res;

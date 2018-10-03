@@ -3,7 +3,7 @@
 //
 
 #include "Texture.h"
-#include <SOIL.h>
+#include <SOIL/SOIL.h>
 #include <iostream>
 
 

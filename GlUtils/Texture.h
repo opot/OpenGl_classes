@@ -20,6 +20,8 @@ namespace fjfj {
 
         Texture(std::string path);
 
+        Texture() {};
+
     };
 
 }

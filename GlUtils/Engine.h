@@ -5,16 +5,17 @@
 #ifndef GLUTGL_ENGINE_H
 #define GLUTGL_ENGINE_H
 
+#include <GLFW/glfw3.h>
 
 namespace fjfj {
 
     class Engine {
-        void (*init)(void);
+        void (*init)(GLFWwindow*);
         void (*update)(float);
         void (*render)(void);
 
     public:
-        Engine(void (*init)(void), void (*update)(float), void (*render)(void));
+        Engine(void (*init)(GLFWwindow*), void (*update)(float), void (*render)(void));
 
         void start();
 
