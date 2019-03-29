@@ -76,10 +76,18 @@ namespace fjfj {
             glGetProgramInfoLog(this->Program, 512, NULL, infoLog);
             std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
         }
+
         // Delete the shaders as they're linked into our program now and no longer necessery
         glDeleteShader(vertex);
         glDeleteShader(fragment);
-
+    
+        GLint validateStatus;
+        glValidateProgram(this->Program);
+        glGetProgramiv(this->Program, GL_VALIDATE_STATUS, &validateStatus);
+        if (validateStatus != GL_TRUE) {
+          glGetProgramInfoLog(this->Program, 512, NULL, infoLog);
+          std::cout << "ERROR::SHADER::PROGRAM::VALIDATION_FAILED: " << infoLog << std::endl;
+        }
     }
 
     Shader::~Shader() {

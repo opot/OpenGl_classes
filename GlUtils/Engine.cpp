@@ -14,18 +14,17 @@ namespace fjfj {
 
     auto LAST = std::chrono::system_clock::now();
 
-    Engine::Engine(void (*init)(GLFWwindow *), void (*update)(float), void (*render)(void)) :
-            init(init), update(update), render(render) {}
+    Engine::Engine(GameBody& body) : game(body) {}
 
-    void Engine::start() {
+    void Engine::start(int width, int height, bool fullscreen) {
         GLFWwindow *window;
 
         if (!glfwInit()) {
             exit(EXIT_FAILURE);
         }
 
-        //window = glfwCreateWindow(1920, 1080, "Simple example", glfwGetPrimaryMonitor(), nullptr);
-        window = glfwCreateWindow(1280, 720, "Simple example", nullptr, nullptr);
+        //window = glfwCreateWindow(1920, 1080, "Simple example",, nullptr);
+        window = glfwCreateWindow(width, height, "Simple example", fullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);
 
 
         if (!window) {
@@ -41,15 +40,15 @@ namespace fjfj {
             std::cout << "glewInit failed, aborting." << std::endl;
         }
 
-        this->init(window);
+        game.init(window);
 
         while (!glfwWindowShouldClose(window)) {
             auto NOW = std::chrono::system_clock::now();
             float delta = std::chrono::duration_cast<std::chrono::duration<float>>(NOW - LAST).count();
 
-            this->update(delta);
+            game.update(delta);
             LAST = NOW;
-            this->render();
+            game.render();
 
             glfwSwapBuffers(window);
             glfwPollEvents();

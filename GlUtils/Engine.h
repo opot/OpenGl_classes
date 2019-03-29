@@ -5,23 +5,27 @@
 #ifndef GLUTGL_ENGINE_H
 #define GLUTGL_ENGINE_H
 
+#include <gl/glew.h>
 #include <GLFW/glfw3.h>
 
 namespace fjfj {
 
-    class Engine {
-        void (*init)(GLFWwindow*);
-        void (*update)(float);
-        void (*render)(void);
+  class GameBody {
+  public:
+    virtual void init(GLFWwindow*) = 0;
+    virtual void update(float delta) = 0;
+    virtual void render() = 0;
+    virtual ~GameBody() = default;
+  };
 
-    public:
-        Engine(void (*init)(GLFWwindow*), void (*update)(float), void (*render)(void));
+  class Engine {
+    GameBody& game;
 
-        void start();
+  public:
+    Engine(GameBody& body);
+    void start(int width, int height, bool fullscreen);
 
-    };
-
-    //TODO Mesh concat
+  };
 }
 
 #endif //GLUTGL_ENGINE_H

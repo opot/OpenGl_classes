@@ -1,29 +1,21 @@
-//
-// Created by opot on 06.04.17.
-//
-
-#ifndef GLUTGL_RENDERABLE_H
-#define GLUTGL_RENDERABLE_H
+#pragma once
 
 #include <GL/glew.h>
 
 namespace fjfj {
 
-    class Mesh {
+  class Mesh {
 
-        GLuint VBO, VAO;
-        int vert_count;
+    GLuint VBO, VAO;
+    int vert_count;
 
-    public:
-        Mesh(GLfloat vertices[], int vert_count);
+  public:
+    Mesh() = default;
+    Mesh(GLfloat vertices[], int vert_count);
+    ~Mesh();
 
-        ~Mesh();
-
-        void draw();
-
-        static Mesh* genCube();
-    };
+    void draw();
+    static Mesh* genCube();
+  };
 
 }
-
-#endif //GLUTGL_RENDERABLE_H

@@ -24,11 +24,14 @@ namespace fjfj {
         glm::vec3 Right;
         glm::vec3 WorldUp;
         // Perspective options
-        float fov = 43;
+        float fov = 45.0f;
         float aspect;
         float near = 0.01f;
-        float far = 1000;
-        glm::mat4 perspective;
+        float far = 100.0f;
+        float width;
+        float height;
+        glm::mat4 projection;
+        glm::mat4 view;
 
         Camera(int width, int height, glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f),
                glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f));
@@ -37,7 +40,7 @@ namespace fjfj {
 
         void lookAt(glm::vec3 target);
         void update();
-        void updatePerspective();
+        void updateProjection();
 
     };
 
