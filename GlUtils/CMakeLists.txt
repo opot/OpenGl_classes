@@ -8,12 +8,11 @@ find_package(SOIL REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(GLEW REQUIRED)
 
-add_subdirectory(reactphysics3d)
+#add_subdirectory(reactphysics3d)
 
-include_directories(. OpenGL glfw3 SOIL ${GLEW_SOURCE} reactphysics3d/src)
+include_directories(. OpenGL glfw3 SOIL ${GLEW_SOURCE})
 file(GLOB GLUTILS_SOURCES *.h *.cpp)
-file(GLOB ECS_SOURCES ecs/ECS.cpp ecs/ECS.h ecs/systems/*.cpp ecs/systems/*.h)
 
-add_library(GlUtils ${GLUTILS_SOURCES} ${ECS_SOURCES})
+add_library(GlUtils ${GLUTILS_SOURCES})
 
-target_link_libraries(GlUtils ${OPENGL_gl_LIBRARY} glfw SOIL glm GLEW::GLEW reactphysics3d)
+target_link_libraries(GlUtils ${OPENGL_gl_LIBRARY} glfw SOIL glm GLEW::GLEW)
