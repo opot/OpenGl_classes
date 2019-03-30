@@ -12,7 +12,7 @@ add_subdirectory(reactphysics3d)
 
 include_directories(. OpenGL glfw3 SOIL ${GLEW_SOURCE} reactphysics3d/src)
 file(GLOB GLUTILS_SOURCES *.h *.cpp)
-file(GLOB ECS_SOURCES ecs/ECS.cpp ecs/systems/*.cpp)
+file(GLOB ECS_SOURCES ecs/ECS.cpp ecs/ECS.h ecs/systems/*.cpp ecs/systems/*.h)
 
 add_library(GlUtils ${GLUTILS_SOURCES} ${ECS_SOURCES})
 

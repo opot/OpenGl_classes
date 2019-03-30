@@ -48,7 +48,6 @@ namespace fjfj {
 
             game.update(delta);
             LAST = NOW;
-            game.render();
 
             glfwSwapBuffers(window);
             glfwPollEvents();

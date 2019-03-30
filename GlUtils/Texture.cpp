@@ -10,7 +10,7 @@
 namespace fjfj {
 
   Texture::Texture(std::string path) {
-   texture = SOIL_load_OGL_texture(path.c_str(), SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+   texture = SOIL_load_OGL_texture(path.c_str(), SOIL_LOAD_RGBA, SOIL_CREATE_NEW_ID, 0);
   }
 
 }

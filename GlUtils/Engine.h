@@ -14,7 +14,6 @@ namespace fjfj {
   public:
     virtual void init(GLFWwindow*) = 0;
     virtual void update(float delta) = 0;
-    virtual void render() = 0;
     virtual ~GameBody() = default;
   };
 
