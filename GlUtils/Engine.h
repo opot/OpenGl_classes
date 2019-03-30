@@ -5,7 +5,7 @@
 #ifndef GLUTGL_ENGINE_H
 #define GLUTGL_ENGINE_H
 
-#include <gl/glew.h>
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
 namespace fjfj {
