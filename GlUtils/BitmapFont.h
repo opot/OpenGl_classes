@@ -14,7 +14,7 @@
 namespace fjfj {
 
     class BitmapFont {
-        std::string bitmaps;
+        std::wstring bitmaps;
         Texture *tex;
         Shader *shader;
 
@@ -24,10 +24,10 @@ namespace fjfj {
         GLint size_loc;
     public:
 
-        BitmapFont(std::string bitmaps, Texture *tex);
+        BitmapFont(std::wstring bitmaps, Texture *tex);
 
         void
-        draw(SpriteBatch *batch, OrthographicCamera *cam, std::string str, float x, float y, float width, float height);
+        draw(SpriteBatch *batch, OrthographicCamera *cam, std::wstring str, float x, float y, float width, float height);
 
     };
 }

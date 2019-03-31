@@ -4,15 +4,15 @@
 
 #include "BitmapFont.h"
 
-fjfj::BitmapFont::BitmapFont(std::string bitmaps, fjfj::Texture *tex) : bitmaps(std::move(bitmaps)), tex(tex) {
-    shader = new Shader("shader/font.vert", "shader/font.frag");
+fjfj::BitmapFont::BitmapFont(std::wstring bitmaps, fjfj::Texture *tex) : bitmaps(std::move(bitmaps)), tex(tex) {
+    shader = new Shader("assets/shader/font.vert", "assets/shader/font.frag");
     model_loc = glGetUniformLocation(shader->Program, "u_ModelTrans");
     proj_loc = glGetUniformLocation(shader->Program, "u_ProjTrans");
     data_loc = glGetUniformLocation(shader->Program, "u_Data");
     size_loc = glGetUniformLocation(shader->Program, "u_Size");
 }
 
-void fjfj::BitmapFont::draw(fjfj::SpriteBatch *batch, fjfj::OrthographicCamera *cam, std::string str, float x, float y,
+void fjfj::BitmapFont::draw(fjfj::SpriteBatch *batch, fjfj::OrthographicCamera *cam, std::wstring str, float x, float y,
                             float width, float height) {
     shader->Use();
     glUniformMatrix4fv(proj_loc, 1, GL_FALSE, glm::value_ptr(cam->proj));
